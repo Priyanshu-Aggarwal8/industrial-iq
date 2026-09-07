@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  .dark {
+    color-scheme: dark;
+  }
+  
+  body {
+    @apply bg-neutral-50 dark:bg-black text-neutral-900 dark:text-neutral-100 font-sans min-h-screen selection:bg-neutral-900 selection:text-white dark:selection:bg-white dark:selection:text-black antialiased overflow-x-hidden transition-colors duration-150;
+    letter-spacing: -0.01em;
+  }
+
+  /* Custom subtle Vercel-style scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-neutral-300 dark:bg-neutral-800 rounded-full hover:bg-neutral-400 dark:hover:bg-neutral-700 transition-colors;
+  }
+}
+
+@layer components {
+  .surface-card {
+    @apply bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-subtle rounded-xl transition-all;
+  }
+  
+  .surface-elevated {
+    @apply bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-card rounded-2xl transition-all;
+  }
+
+  .editorial-title {
+    @apply font-sans font-semibold tracking-tight text-neutral-950 dark:text-neutral-50;
+  }
+
+  .metric-value {
+    @apply font-sans font-bold tracking-tight text-neutral-950 dark:text-neutral-50 tabular-nums;
+  }
+}
+

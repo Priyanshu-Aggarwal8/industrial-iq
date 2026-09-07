@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2310b981' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect width='18' height='18' x='3' y='3' rx='2'/><path d='M7 17v-4'/><path d='M12 17V7'/><path d='M17 17v-8'/></svg>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Industrial IQ — Enterprise automotive dealership performance intelligence, revenue quota pacing, and operational telemetry platform for multi-city dealership groups." />
+    <meta name="theme-color" content="#090a0c" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
+    <title>Industrial IQ — Automotive Enterprise Dealership Intelligence</title>
+    
+    <!-- Open Graph / Social Sharing Meta -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Industrial IQ — Automotive Enterprise Dealership Intelligence" />
+    <meta property="og:description" content="Enterprise Dealership Performance & Quota Pacing Engine. Built with deterministic mathematical governance and 6-tier architecture." />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('iq_theme');
+          if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body class="bg-slate-50 text-slate-900 dark:bg-black dark:text-neutral-100 antialiased selection:bg-emerald-500/20 selection:text-emerald-900 dark:selection:text-emerald-300">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
