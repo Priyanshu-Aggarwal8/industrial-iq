@@ -145,3 +145,5 @@ export interface DomainDeliveryAnalytics {
   }[];
 }
 
+export * from './vehicles';
+

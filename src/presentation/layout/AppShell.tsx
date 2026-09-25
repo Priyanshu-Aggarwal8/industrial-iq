@@ -106,6 +106,11 @@ export const AppShell: React.FC<AppShellProps> = ({
                   </button>
                 </li>
                 <li>
+                  <button onClick={() => onNavigate('vehicles')} className="hover:text-neutral-900 dark:hover:text-white transition-colors">
+                    Vehicles
+                  </button>
+                </li>
+                <li>
                   <button onClick={() => onNavigate('leads')} className="hover:text-neutral-900 dark:hover:text-white transition-colors">
                     Pipeline & Leads
                   </button>

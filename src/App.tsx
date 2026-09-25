@@ -16,6 +16,7 @@ import { LeadRegistryPage } from './presentation/leads/LeadRegistryPage';
 import { LeadLifecycleModal } from './presentation/leads/LeadLifecycleModal';
 import { ActionCenterFullPage } from './presentation/insights/ActionCenterFullPage';
 import { LandingPage } from './presentation/landing/LandingPage';
+import { VehicleModelPage } from './presentation/vehicles/VehicleModelPage';
 
 export const App: React.FC = () => {
   const {
@@ -40,6 +41,7 @@ export const App: React.FC = () => {
     branchSummaries,
     repSummaries,
     insightsViewModel,
+    vehiclesViewModel,
     selectedBranchViewModel,
     selectedRepViewModel,
   } = useApp();
@@ -60,6 +62,8 @@ export const App: React.FC = () => {
           return `${selectedRepViewModel.rep.name} Profile`;
         }
         return 'Sales Leaderboard';
+      case 'vehicles':
+        return 'Vehicle Fleet Performance';
       case 'leads':
         return 'Lead Registry & Pipeline';
       case 'insights':
@@ -136,6 +140,19 @@ export const App: React.FC = () => {
             onSelectRep={repId => navigateTo('representatives', { repId })}
             onSelectBranch={branchId => navigateTo('branches', { branchId })}
             onGoHome={() => navigateTo('overview')}
+          />
+        );
+
+      case 'vehicles':
+        return (
+          <VehicleModelPage
+            viewModel={vehiclesViewModel}
+            branches={repos.branches.getAll()}
+            selectedBranchId={selectedBranchId}
+            onSelectBranch={branchId => setSelectedBranchId(branchId)}
+            onSelectLead={leadId => setInspectingLeadId(leadId)}
+            onGoHome={() => navigateTo('overview')}
+            onViewLeadsForModel={model => navigateTo('leads', { filter: model })}
           />
         );
 

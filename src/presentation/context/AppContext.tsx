@@ -17,6 +17,8 @@ import {
   RepresentativePerformanceViewModel,
   LeadDetailsViewModel,
   ActionableInsightsViewModel,
+  getVehiclePerformanceViewModel,
+  VehiclePerformanceViewModel,
 } from '../../application';
 import { calculateBranchPerformanceSummaries } from '../../domain/targets';
 import { calculateRepPerformanceSummaries } from '../../domain/aging';
@@ -65,6 +67,7 @@ interface AppContextType {
   branchSummaries: DomainBranchPerformance[];
   repSummaries: DomainRepPerformance[];
   insightsViewModel: ActionableInsightsViewModel;
+  vehiclesViewModel: VehiclePerformanceViewModel;
   selectedBranchViewModel: BranchPerformanceViewModel | null;
   selectedRepViewModel: RepresentativePerformanceViewModel | null;
 }
@@ -166,6 +169,9 @@ export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     } else if (mainSection === 'insights') {
       setCurrentRoute('insights');
       setRouteParams(queryParams);
+    } else if (mainSection === 'vehicles') {
+      setCurrentRoute('vehicles');
+      setRouteParams(queryParams);
     } else {
       setCurrentRoute('overview');
       setRouteParams({});
@@ -189,6 +195,8 @@ export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       hash += `/${params.repId}`;
     } else if (route === 'leads' && params.leadId) {
       hash += `/${params.leadId}`;
+    } else if (route === 'vehicles' && params.branchId) {
+      hash += `/${params.branchId}`;
     }
 
     const query = new URLSearchParams();
@@ -270,6 +278,15 @@ export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     return getLeadDetailsViewModel(repos, inspectingLeadId);
   }, [repos, inspectingLeadId]);
 
+  const vehiclesViewModel = useMemo(() => {
+    return getVehiclePerformanceViewModel(
+      repos,
+      selectedBranchId,
+      dateFilter.startDate,
+      dateFilter.endDate
+    );
+  }, [repos, selectedBranchId, dateFilter.startDate, dateFilter.endDate]);
+
   return (
     <AppContext.Provider
       value={{
@@ -295,6 +312,7 @@ export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         branchSummaries,
         repSummaries,
         insightsViewModel,
+        vehiclesViewModel,
         selectedBranchViewModel,
         selectedRepViewModel,
       }}

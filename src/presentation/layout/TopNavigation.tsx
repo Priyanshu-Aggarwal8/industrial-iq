@@ -11,6 +11,7 @@ import {
   Building2,
   Users,
   Car,
+  GitBranch,
   Sparkles,
   Menu,
   X,
@@ -59,7 +60,8 @@ export const TopNavigation: React.FC<TopNavigationProps> = ({
     { id: 'overview', label: 'Overview', icon: LayoutDashboard },
     { id: 'branches', label: 'Branches', icon: Building2 },
     { id: 'representatives', label: 'Sales Officers', icon: Users },
-    { id: 'leads', label: 'Pipeline & Leads', icon: Car },
+    { id: 'vehicles', label: 'Vehicles', icon: Car },
+    { id: 'leads', label: 'Pipeline & Leads', icon: GitBranch },
     { id: 'insights', label: 'Action Center', icon: Sparkles, badge: insightsCount },
   ];
 

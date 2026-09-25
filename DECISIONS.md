@@ -206,3 +206,48 @@ egotiation, 	est_drive, or contacted) without a final transition record or lost_
 2. **Live RTO & Transport Partner Portal**: Supplier-facing tracking interface for transport logistics and RTO registration agents to reduce handover turnaround from 19 days to under 7 days.
 3. **WhatsApp Business API Webhooks**: Automated customer milestone messaging triggered at each status transition (e.g. vehicle dispatch, PDI clearance, delivery appointment).
 4. **Board Pack PDF Exporter**: Automated monthly dealership group PDF board presentation generator.
+
+---
+
+## 11. Vehicle Model-by-Model Fleet Intelligence & Revenue Attribution
+
+### A. Architectural & Product Motivation
+Automotive retail networks require granular model-level visibility to balance showroom inventory allocation against actual customer demand. To address this without tampering with existing core modules, we introduced a dedicated **"Vehicles"** screen (`/#/vehicles`) adhering strictly to the platform's 6-tier Clean Architecture:
+- **Layer 3 (Domain)**: `src/domain/vehicles.ts` implements pure, deterministic calculations for orders, deliveries, revenue realization, and dealership-level performance matrices.
+- **Layer 4 (Application)**: `src/application/use-cases/getVehiclePerformanceViewModel.ts` orchestrates repositories and prepares pre-formatted view models.
+- **Layer 5 (Presentation)**: `src/presentation/vehicles/VehicleModelPage.tsx` delivers an executive-grade interface featuring spotlight hero cards, interactive Recharts distribution visualization, multi-column sorting, and expandable dealership drill-down sub-rows.
+
+### B. Fleet Ground Truth & Model Matrix (All Dealerships)
+
+Across the 5 dealerships and 510 lead records, the model-by-model performance breakdown is mathematically verified:
+
+| Rank | Vehicle Model | Segment | Inbound Inquiries | Orders Booked | Delivered Units | Realized Revenue | **Revenue Contribution %** | Volume Share % |
+|:---:|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|
+| **#1** | **Toyota Fortuner** | Full-Size Premium SUV | 94 | 36 | 30 | **₹12.61 Cr** (₹12,60,50,000) | **32.42%** | 18.75% |
+| **#2** | **Toyota Innova Hycross** | Premium Hybrid MPV | 83 | 36 | 28 | **₹7.19 Cr** (₹7,19,30,000) | **18.50%** | 17.50% |
+| **#3** | **Toyota Camry** | Luxury Hybrid Sedan | 35 | 13 | 10 | **₹5.34 Cr** (₹5,34,40,000) | **13.75%** | 6.25% |
+| **#4** | **Toyota Innova Crysta** | Executive Diesel MPV | 53 | 20 | 17 | **₹4.22 Cr** (₹4,22,20,000) | **10.86%** | 10.63% |
+| **#5** | **Toyota Urban Cruiser Hyryder** | Compact Hybrid SUV | 104 | 34 | 27 | **₹4.05 Cr** (₹4,04,60,000) | **10.41%** | 16.88% |
+| **#6** | **Toyota Glanza** | Premium Urban Hatchback | 130 | 55 | 44 | **₹3.97 Cr** (₹3,97,40,000) | **10.22%** | 27.50% |
+| **#7** | **Toyota Hilux** | Heavy-Duty 4x4 Pickup | 11 | 4 | 4 | **₹1.49 Cr** (₹1,49,20,000) | **3.84%** | 2.50% |
+| **Total** | **Fleet Total** | — | **510** | **198** | **160** | **₹38.88 Cr** (₹38,87,60,000) | **100.00%** | **100.00%** |
+
+### C. Best-Selling Model Identification
+In automotive sales analysis, "best-selling" carries dual meanings which are both explicitly presented:
+1. **Best Seller by Revenue (Primary Commercial Driver)**:
+   - **Model**: **Toyota Fortuner**
+   - **Realized Revenue**: **₹12.61 Cr**
+   - **Revenue Contribution to Overall Sales**: **32.42%** of total group sales (nearly one-third of all sales revenue)
+   - **Units Delivered**: 30 units | **Orders Booked**: 36 orders
+2. **Best Seller by Volume (Unit Velocity Driver)**:
+   - **Model**: **Toyota Glanza**
+   - **Units Delivered**: **44 units** (27.50% of all handovers) | **Orders Booked**: **55 orders** (27.78% of all bookings)
+   - **Revenue Contribution to Overall Sales**: **10.22%** (₹3.97 Cr)
+
+### D. Localized Dealership Drill-Down Dynamics
+The vehicle performance engine supports full dynamic drill-down by dealership, exposing critical operational variances:
+* **Downtown Toyota (Chennai)**: Fortuner leads in revenue (₹3.70 Cr, 36.2% of branch sales), while Urban Cruiser Hyryder leads in volume (9 deliveries, 10 orders).
+* **Highway Toyota (Chennai)**: Fortuner drives 37.1% of revenue (₹3.22 Cr), while Innova Hycross and Glanza tie for volume leadership (8 deliveries each).
+* **Lakeside Toyota (Bangalore)**: Despite low total branch volume (6 units delivered), Fortuner dominates revenue share at 40.2% (₹42.9 L).
+* **Central Toyota (Hyderabad)**: Exhibits highest single-model revenue concentration — Fortuner accounts for 46.9% of branch sales (₹3.50 Cr), while Glanza generates 13 deliveries (16 orders).
+* **Eastside Toyota (Mumbai)**: The only branch where Innova Hycross surpasses Fortuner as the top revenue driver (₹2.87 Cr, 25.1% of branch sales, 11 deliveries, 15 orders), while Glanza leads unit volume (13 deliveries, 17 orders).

@@ -11,6 +11,8 @@ import {
   DomainRepPerformance,
   DomainActionableInsight,
   DomainDeliveryAnalytics,
+  DomainVehicleFleetPerformance,
+  DomainVehicleModelPerformance,
 } from '../domain/models';
 import { DomainMonthlyTargetPoint } from '../domain/targets';
 import { NormalizedLead } from '../data/normalizer';
@@ -81,3 +83,56 @@ export interface ActionCenterViewModel {
 }
 
 export type ActionableInsightsViewModel = ActionCenterViewModel;
+
+export interface VehicleModelBranchBreakdownViewModel {
+  branchId: string;
+  branchName: string;
+  branchCity: string;
+  orders: number;
+  delivers: number;
+  orderBacklog: number;
+  deliveredRevenue: number;
+  deliveredRevenueFormatted: string;
+  totalOrderValue: number;
+  totalOrderValueFormatted: string;
+  leadsCount: number;
+}
+
+export interface VehicleModelItemViewModel {
+  raw: DomainVehicleModelPerformance;
+  model: string;
+  orders: number;
+  delivers: number;
+  orderBacklog: number;
+  deliveredRevenue: number;
+  totalOrderValue: number;
+  revenueFormatted: string;
+  totalOrderValueFormatted: string;
+  revenueContributionPercent: number;
+  revenueContributionFormatted: string;
+  volumeContributionPercent: number;
+  volumeContributionFormatted: string;
+  leadsCount: number;
+  conversionRate: number;
+  conversionRateFormatted: string;
+  orderConversionRate: number;
+  orderConversionRateFormatted: string;
+  avgDealValue: number;
+  avgDealValueFormatted: string;
+  branchBreakdown: VehicleModelBranchBreakdownViewModel[];
+}
+
+export interface VehiclePerformanceViewModel {
+  fleet: DomainVehicleFleetPerformance;
+  models: VehicleModelItemViewModel[];
+  bestSellingByRevenue: VehicleModelItemViewModel | null;
+  bestSellingByVolume: VehicleModelItemViewModel | null;
+  totalDeliveredRevenueFormatted: string;
+  totalOrderValueFormatted: string;
+  totalDeliveredUnitsFormatted: string;
+  totalOrdersCountFormatted: string;
+  totalOrderBacklogFormatted: string;
+  totalLeadsCountFormatted: string;
+  fulfillmentRateFormatted: string;
+  selectedBranchName: string;
+}

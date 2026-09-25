@@ -12,6 +12,7 @@ import {
   ShieldAlert,
   Layers,
   Sparkles,
+  Car,
 } from 'lucide-react';
 
 export type AppNavSection =
@@ -19,6 +20,7 @@ export type AppNavSection =
   | 'overview'
   | 'branches'
   | 'representatives'
+  | 'vehicles'
   | 'leads'
   | 'insights';
 
@@ -47,6 +49,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
     { id: 'overview', label: 'Executive Overview', icon: LayoutDashboard },
     { id: 'branches', label: 'Branch Performance', icon: Building2 },
     { id: 'representatives', label: 'Sales Representatives', icon: Users },
+    { id: 'vehicles', label: 'Vehicles', icon: Car },
     { id: 'leads', label: 'Lead Intelligence', icon: GitBranch },
     { id: 'insights', label: 'Action Center', icon: ShieldAlert, badge: insightsCount },
   ];
